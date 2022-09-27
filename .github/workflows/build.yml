@@ -14,9 +14,6 @@ jobs:
       - name: get-version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/heads\//}
-      - name: find patch.exe
-        run: |
-          ls C:\msys64\mingw64\bin
 
   windows:
     runs-on: windows-latest
@@ -25,6 +22,9 @@ jobs:
       PACKAGENAME: opencv-mobile-4.6.0-windows-vs2022
     steps:
       - uses: actions/checkout@v2
+      - name: show bin
+        run: |
+          ls C:\msys64\mingw64\bin
       - name: opencv-source
         run: |
           Invoke-WebRequest -Uri https://github.com/opencv/opencv/archive/refs/tags/${{ env.OPENCV_VERSION }}.zip -OutFile opencv-${{ env.OPENCV_VERSION }}.zip
@@ -32,7 +32,7 @@ jobs:
           cd opencv-${{ env.OPENCV_VERSION }}
           Clear-Content "cmake\OpenCVFindLibsGrfmt.cmake"
           Remove-Item "modules\gapi" -Recurse
-          C:\msys64\usr\bin\patch.exe -p1 -i ..\opencv-4.5.4-no-zlib.patch
+          C:/msys64/usr/bin/patch.exe -p1 -i ..\opencv-4.5.4-no-zlib.patch
           Remove-Item "modules\highgui" -Recurse
           Copy-Item -Recurse -Path "..\highgui" -Destination "modules\"
       - name: build-x86

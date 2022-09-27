@@ -25,8 +25,8 @@ jobs:
       - name: opencv-source
         run: |
           ls C:\msys64
-          ls C:\msys64\usr
-          ls C:\msys64\usr\bin
+          ls C:\msys64\mingw64
+          ls C:\msys64\mingw64\bin
           Invoke-WebRequest -Uri https://github.com/opencv/opencv/archive/refs/tags/${{ env.OPENCV_VERSION }}.zip -OutFile opencv-${{ env.OPENCV_VERSION }}.zip
           7z x ./opencv-${{ env.OPENCV_VERSION }}.zip
           cd opencv-${{ env.OPENCV_VERSION }}

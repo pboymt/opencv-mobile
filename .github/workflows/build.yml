@@ -34,6 +34,7 @@ jobs:
           Remove-Item "modules\gapi" -Recurse
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
+          git apply ../opencv-4.5.4-no-zlib.patch
           Remove-Item "modules\highgui" -Recurse
           Copy-Item -Recurse -Path "..\highgui" -Destination "modules\"
       - name: build-x86

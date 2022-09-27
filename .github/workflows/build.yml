@@ -29,7 +29,7 @@ jobs:
           cd opencv-${{ env.OPENCV_VERSION }}
           Clear-Content "cmake\OpenCVFindLibsGrfmt.cmake"
           Remove-Item "modules\gapi" -Recurse
-          C:\msys64\usr\bin\patch.exe -p1 -i ..\opencv-4.5.4-no-zlib.patch
+          C:\msys64\mingw64\bin\patch.exe -p1 -i ..\opencv-4.5.4-no-zlib.patch
           Remove-Item "modules\highgui" -Recurse
           Copy-Item -Recurse -Path "..\highgui" -Destination "modules\"
       - name: build-x86

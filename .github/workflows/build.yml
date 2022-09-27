@@ -14,6 +14,9 @@ jobs:
       - name: get-version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/heads\//}
+      - name: find patch.exe
+        run: |
+          ls C:\msys64\mingw64\bin
 
   windows:
     runs-on: windows-latest
@@ -24,9 +27,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: opencv-source
         run: |
-          ls C:\msys64
-          ls C:\msys64\mingw64
-          ls C:\msys64\mingw64\bin
           Invoke-WebRequest -Uri https://github.com/opencv/opencv/archive/refs/tags/${{ env.OPENCV_VERSION }}.zip -OutFile opencv-${{ env.OPENCV_VERSION }}.zip
           7z x ./opencv-${{ env.OPENCV_VERSION }}.zip
           cd opencv-${{ env.OPENCV_VERSION }}

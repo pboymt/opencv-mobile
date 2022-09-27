@@ -24,12 +24,15 @@ jobs:
       - uses: actions/checkout@v2
       - name: opencv-source
         run: |
+          ls C:\msys64
+          ls C:\msys64\usr
+          ls C:\msys64\usr\bin
           Invoke-WebRequest -Uri https://github.com/opencv/opencv/archive/refs/tags/${{ env.OPENCV_VERSION }}.zip -OutFile opencv-${{ env.OPENCV_VERSION }}.zip
           7z x ./opencv-${{ env.OPENCV_VERSION }}.zip
           cd opencv-${{ env.OPENCV_VERSION }}
           Clear-Content "cmake\OpenCVFindLibsGrfmt.cmake"
           Remove-Item "modules\gapi" -Recurse
-          C:\msys64\mingw64\bin\patch.exe -p1 -i ..\opencv-4.5.4-no-zlib.patch
+          C:\msys64\usr\bin\patch.exe -p1 -i ..\opencv-4.5.4-no-zlib.patch
           Remove-Item "modules\highgui" -Recurse
           Copy-Item -Recurse -Path "..\highgui" -Destination "modules\"
       - name: build-x86
